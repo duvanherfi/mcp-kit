@@ -8,7 +8,7 @@
     },
     "postgres": {
       "command": "uvx",
-      "args": ["postgres-mcp", "--access-mode=restricted"],
+      "args": ["--with", "mcp<2", "postgres-mcp", "--access-mode=restricted"],
       "env": {
         "DATABASE_URI": "PON_AQUI_postgresql://ia_lectura:CLAVE@localhost:5432/mi_base"
       }

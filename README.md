@@ -32,7 +32,7 @@ claude mcp add --transport http github https://api.githubcopilot.com/mcp/ \
 
 # Postgres — en modo solo lectura (mira postgres/solo-lectura.sql)
 claude mcp add postgres -e DATABASE_URI="postgresql://ia_lectura:CLAVE@localhost:5432/mi_base" \
-  -- uvx postgres-mcp --access-mode=restricted
+  -- uvx --with "mcp<2" postgres-mcp --access-mode=restricted
 
 # Playwright
 claude mcp add playwright -- npx @playwright/mcp@latest
@@ -55,7 +55,7 @@ Copia [`cursor/mcp.json`](cursor/mcp.json) a `~/.cursor/mcp.json` (para todos
 tus proyectos) o a `.cursor/mcp.json` (solo uno), y cambia los valores
 `PON_AQUI_…` por los tuyos.
 
-## Tres reglas para no llevarte un susto
+## Cuatro reglas para no llevarte un susto
 
 1. **La base, siempre en solo lectura.** Usa `--access-mode=restricted` **y**
    un usuario de Postgres que solo pueda leer
@@ -63,7 +63,10 @@ tus proyectos) o a `.cursor/mcp.json` (solo uno), y cambia los valores
    si una falla, queda la otra.
 2. **Ningún token en el repo.** Van en variables de entorno. Si copias el
    archivo de Cursor con tus claves dentro, no lo subas a git.
-3. **Empieza con uno.** Conecta el que más uses, mira qué le pide la IA y
+3. **El `--with "mcp<2"` de Postgres no sobra.** `postgres-mcp` aún no
+   funciona con la versión 2 del SDK de MCP: sin esa parte, `uvx` instala la
+   nueva y el servidor no arranca (probado en octubre de 2026).
+4. **Empieza con uno.** Conecta el que más uses, mira qué le pide la IA y
    luego añade el siguiente.
 
 ## De dónde sale cada uno
